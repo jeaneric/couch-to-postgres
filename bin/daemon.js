@@ -234,7 +234,7 @@ function pgtableCheck(pgtbl) {
 
     var sql = "SELECT EXISTS (SELECT 1 FROM   pg_catalog.pg_class c JOIN ";
     sql += "pg_catalog.pg_namespace n ON n.oid = c.relnamespace ";
-    sql += "WHERE  n.nspname = 'public' AND c.relkind = 'r' ";
+    sql += "WHERE  n.nspname = '" + daemon_settings["postgres"]['schema'] + "' AND c.relkind = 'r' ";
     sql += "AND c.relname = '" + pgtbl + "') AS mytest";
     pgclient.query(sql, function(err, result) {
         if (err) {
@@ -242,7 +242,7 @@ function pgtableCheck(pgtbl) {
             process.exit();
         } else {
             if (result.rows[0].mytest.toString() == 'false') {
-                sql = "CREATE TABLE " + pgtbl + " ";
+                sql = "CREATE TABLE "+daemon_settings["postgres"]['schema']+"." + pgtbl + " ";
                 sql += "(id text, doc jsonb, CONSTRAINT ";
                 sql += pgtbl + "_pkey PRIMARY KEY (id) ) ";
 

@@ -4,7 +4,8 @@ function DaemonSettings() {
       database: "couchplay",
       username: "mike",
       password: "mike",
-      host: "localhost"
+      host: "localhost",
+      schema:"mobile_json"
     },
     couchdb: {
       url: 'http://127.0.0.1:5984'

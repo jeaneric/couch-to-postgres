@@ -138,6 +138,7 @@ function findFeeds(find_once) {
               console.error(msg, err);
               process.exit(1);
             });
+            PostgresCouchContainer[pgtable].events.on('change',console.log);
 
             //PostgresCouchContainer[pgtable].events.on('change', console.log);
             PostgresCouchContainer[pgtable].events.on('change.error', function(tbl, change, err) {

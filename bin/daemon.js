@@ -227,10 +227,9 @@ function pgWatchdog() {
     //test postgres connection
     console.log('PG_WATCHDOG: OK'); //comment out if too much info
   }
-  //already defined at the end ?!??!?
-  /*setTimeout(function() {
+  setTimeout(function() {
     pgWatchdog();
-  }, 15000);*/
+  }, 15000);
 
 }
 

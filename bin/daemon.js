@@ -86,11 +86,24 @@ process.on('uncaughtException', function(err) {
     console.error("Postgresl connection died - Node NOT Exiting...", err);
     postgres_dead = true;
     feedsWatchdog(true); //should kill all feeds
-  } else {
+  } else if (str(err).indexOf("Cannot read property 'res' of null")>-1){
+    //we don't want to exit, as we want to continu to sync, with the surrent error looks like it work.
+    //so log to the server:
+    var sql = "INSERT INTO log(message) VALUES ('" + err +"');";
+    pgclient.query(sql, function(err, result) {
+      if (err) {
+        console.error(sql, err);
+      } else {
+        console.log('**** error res of null logged');
+      }
+    });  
+  }
+  else {
     console.error('UNKNOWN ERR - exiting');
     console.error(err.code)
     console.error(err)
     //perhaps make a shutdown function
+    
     process.exit();
   }
 });

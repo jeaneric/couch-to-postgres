@@ -146,12 +146,12 @@ function findFeeds(find_once) {
 
             PostgresCouchContainer[pgtable].events.on('connect', console.log);
 
-            PostgresCouchContainer[pgtable].events.on('checkpoint', console.log); //Comment out if too much info
+            // PostgresCouchContainer[pgtable].events.on('checkpoint', console.log); //Comment out if too much info
             PostgresCouchContainer[pgtable].events.on('checkpoint.error', function(msg, err) {
               console.error(msg, err);
               process.exit(1);
             });
-            PostgresCouchContainer[pgtable].events.on('change',console.log);
+            // PostgresCouchContainer[pgtable].events.on('change',console.log);
 
             //PostgresCouchContainer[pgtable].events.on('change', console.log);
             PostgresCouchContainer[pgtable].events.on('change.error', function(tbl, change, err) {
